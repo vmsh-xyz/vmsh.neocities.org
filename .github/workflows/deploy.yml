@@ -1,31 +1,26 @@
-name: Deploy to WebDAV
+name: Deploy to neocities
 
+# only run on changes to main. Use main or master depending on whatever your default branch is called.
 on:
   push:
     branches:
       - main
 
+concurrency: # prevent concurrent deploys doing strange things
+  group: deploy-to-neocities
+  cancel-in-progress: true
+
 jobs:
-  webdav-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install lftp
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
-      - name: Sync files via WebDAV
-        env:
-          WEBDAV_URL: ${{ secrets.WEBDAV_URL }}
-          WEBDAV_USER: ${{ secrets.WEBDAV_USER }}
-          WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
-        run: |
-          lftp -c "
-          set ssl:verify-certificate false
-          open $WEBDAV_URL
-          user $WEBDAV_USER '$WEBDAV_PASSWORD'
-          mirror --reverse --delete --verbose --exclude .git/ --exclude .github/ . /
-          "
+    - uses: actions/checkout@v4
+    # When the dist_dir is ready, deploy it to neocities
+    - name: Deploy to neocities
+      uses: bcomnes/deploy-to-neocities@v3
+      with:
+        api_key: ${{ secrets.NEOCITIES_API_TOKEN }}
+        cleanup: false
+        neocities_supporter: true
+        dist_dir: public
