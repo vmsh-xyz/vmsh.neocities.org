@@ -1,3 +1,5 @@
 {
-  "livePreview.serverRoot": "/public"
+  "livePreview.serverRoot": "/public",
+  "liveServer.settings.multiRootWorkspaceName": "",
+  "liveServer.settings.root": "/public"
 }
