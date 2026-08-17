@@ -27,5 +27,5 @@ jobs:
           set ssl:verify-certificate false
           open $WEBDAV_URL
           user $WEBDAV_USER '$WEBDAV_PASSWORD'
-          mirror --reverse --delete --verbose --exclude .git/ --exclude .github/ . /
+          mirror --reverse --delete --verbose --exclude .git/ --exclude .github/ . /webdav/
           "
