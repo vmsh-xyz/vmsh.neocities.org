@@ -1,0 +1,57 @@
+/* ============= VARIABLES & FONTS ============= */
+:root {
+  --mouse-cursor: url("/assets/img/cursor.png"), auto;
+  --mouse-pointer: url("/assets/img/pointer.png"), pointer;
+  --main-font: 'Emoticomic';
+}
+
+/* Regular */
+@font-face {
+  font-family: 'Emoticomic';
+  src: url('/assets/fonts/emoticomic-regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'Emoticomic';
+  src: url('/assets/fonts/emoticomic-regular.woff2') format('woff2');
+  font-weight: 700;
+}
+
+html {
+  cursor: var(--mouse-cursor);
+}
+
+body {
+  background-color: Navy;
+  color: #A1D76A;
+  font-family: 'Emoticomic';
+  background-image: url('/assets/img/kukerche27.svg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 1500px 1500px;
+  background-position: right -600px bottom -500px;
+}
+
+a, button {
+  color: Orange;
+  cursor: var(--mouse-pointer);
+}
+
+
+/* Мобилни устройства (до 767px) */
+@media (max-width: 767px) {
+  body {
+  background-size: 700px 700px;
+  background-position: right -280px bottom -340px;
+  }
+}
+
+/* Таблети (от 768px до 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+  background-size: 700px 700px;
+  background-position: right -280px bottom -340px;
+  }
+}
