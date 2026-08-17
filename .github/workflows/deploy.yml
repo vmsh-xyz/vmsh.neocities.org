@@ -1,0 +1,20 @@
+name: Deploy to WebDAV
+
+on:
+  push:
+    branches:
+      - main # Изпълнява се при push в главния клон
+
+jobs:
+  webdav-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sync files to WebDAV
+        uses: b3mer/webdav-sync-action@v1
+        with:
+          webdav_url: ${{ secrets.WEBDAV_URL }}
+          webdav_username: ${{ secrets.WEBDAV_USER }}
+          webdav_password: ${{ secrets.WEBDAV_PASSWORD }}
