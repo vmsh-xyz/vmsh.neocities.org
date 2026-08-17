@@ -3,7 +3,7 @@ name: Deploy to WebDAV
 on:
   push:
     branches:
-      - main # Изпълнява се при push в главния клон
+      - main
 
 jobs:
   webdav-deploy:
@@ -12,9 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Sync files to WebDAV
-        uses: b3mer/webdav-sync-action@v1
-        with:
-          webdav_url: ${{ secrets.WEBDAV_URL }}
-          webdav_username: ${{ secrets.WEBDAV_USER }}
-          webdav_password: ${{ secrets.WEBDAV_PASSWORD }}
+      - name: Install lftp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Sync files via WebDAV
+        env:
+          WEBDAV_URL: ${{ secrets.WEBDAV_URL }}
+          WEBDAV_USER: ${{ secrets.WEBDAV_USER }}
+          WEBDAV_PASSWORD: ${{ secrets.WEBDAV_PASSWORD }}
+        run: |
+          lftp -c "
+          set ssl:verify-certificate false
+          open $WEBDAV_URL
+          user $WEBDAV_USER '$WEBDAV_PASSWORD'
+          mirror --reverse --delete --verbose --exclude .git/ --exclude .github/ . /
+          "
