@@ -39,8 +39,28 @@ a, button {
   cursor: var(--mouse-pointer);
 }
 
+.img-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
 
-/* Мобилни устройства (до 767px) */
+.img-btn:focus,
+.img-btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.img-btn img {
+  display: block;
+}
+
+
+/* 767px */
 @media (max-width: 767px) {
   body {
   background-size: 700px 700px;
@@ -48,10 +68,26 @@ a, button {
   }
 }
 
-/* Таблети (от 768px до 1024px) */
+/* 768px-1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
   body {
   background-size: 700px 700px;
   background-position: right -280px bottom -340px;
   }
 }
+
+
+#webamp {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+z-index: 0; right: auto; bottom: auto;
+}
+
+#webamp .window {
+  pointer-events: auto;
+}
+
