@@ -1,0 +1,57 @@
+:root {
+  --mouse-cursor: url("/assets/img/cursor.png"), auto;
+  --mouse-pointer: url("/assets/img/pointer.png"), pointer;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    cursor: var(--mouse-cursor);
+}
+
+.gallery-container {
+    width: 490px;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-track {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.gallery-track a {
+    display: block;
+    width: 100%;
+    line-height: 0;
+    text-decoration: none;
+}
+
+.gallery-track img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+a {
+  cursor: var(--mouse-pointer);
+}
