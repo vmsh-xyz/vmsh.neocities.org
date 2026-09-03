@@ -38,6 +38,10 @@ body {
   background-attachment: fixed;
   background-size: 1500px 1500px;
   background-position: right -600px bottom -500px;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
 }
 
 .page-wrapper {
@@ -46,32 +50,28 @@ body {
   width: 100%;
 }
 
-.sidebar-left {
-  width: 200px;
-  flex-shrink: 0;
-  background-color: #000000;
-  border-right: 0;
-  position: sticky;
-  top: 0;
-}
-
-.sidebar-left iframe {
-  width: 100%;
+.scroll-block {
+  flex: 1;
   height: 100%;
-  border: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
-.content-right {
+.block-left {
+  flex: 0 0 200px;
+}
+
+.block-right {
   flex: 1;
   padding: 20px;
-  max-width: 900px;
+  min-height: 0;
 }
 
-.content-right h1 {
+.block-right h1 {
   margin-bottom: 20px;
 }
 
-.content-right p {
+.block-right p {
   margin-bottom: 16px;
 }
 
@@ -107,6 +107,7 @@ button {
   body {
     background-size: 700px 700px;
     background-position: right -280px bottom -340px;
+    overflow: hidden;
 
     .page-wrapper {
       flex-direction: column;

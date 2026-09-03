@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let items = [];
 
   try {
-    const response = await fetch('thescrollofthank.json');
+    const response = await fetch('/thescrollofthank/thescrollofthank.json');
     if (!response.ok) {
       throw new Error(`Грешка при зареждане: ${response.status}`);
     }
