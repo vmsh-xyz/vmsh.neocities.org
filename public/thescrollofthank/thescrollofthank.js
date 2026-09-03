@@ -1,12 +1,25 @@
-const container = document.getElementById('galleryContainer');
-const track = document.getElementById('galleryTrack');
+document.addEventListener('DOMContentLoaded', async () => {
 
-const response = await fetch('thescrollofthank.json');
-const items = await response.json();
+  const container = document.getElementById('galleryContainer');
+  const track = document.getElementById('galleryTrack');
+  if (!container || !track) return;
 
-const fullList = [...items, ...items];
+  let items = [];
 
-fullList.forEach(item => {
+  try {
+    const response = await fetch('thescrollofthank.json');
+    if (!response.ok) {
+      throw new Error(`Грешка при зареждане: ${response.status}`);
+    }
+    items = await response.json();
+  } catch (error) {
+    console.error('Неуспешно извличане на изображенията:', error);
+    return;
+  }
+
+  const fullList = [...items, ...items];
+
+  fullList.forEach(item => {
     const linkTag = document.createElement('a');
     linkTag.href = item.link;
     linkTag.target = "_blank";
@@ -18,33 +31,50 @@ fullList.forEach(item => {
 
     linkTag.appendChild(imgTag);
     track.appendChild(linkTag);
-});
+  });
 
-let isHovered = false;
-let autoScrollStarted = false;
-const scrollSpeed = 0.6;
+  let isPaused = false;
+  let autoScrollStarted = false;
+  const scrollSpeed = 0.6;
 
-container.addEventListener('mouseenter', () => isHovered = true);
-container.addEventListener('mouseleave', () => isHovered = false);
+  container.addEventListener('mouseenter', () => isPaused = true);
+  container.addEventListener('mouseleave', () => isPaused = false);
 
-setTimeout(() => {
+  container.addEventListener('touchstart', () => isPaused = true, { passive: true });
+  container.addEventListener('touchend', () => isPaused = false, { passive: true });
+  container.addEventListener('touchcancel', () => isPaused = false, { passive: true });
+
+  function setInitialPosition() {
+    const halfHeight = container.scrollHeight / 2;
+    if (halfHeight > 0 && container.scrollTop === 0) {
+      container.scrollTop = halfHeight;
+    }
+  }
+
+  window.addEventListener('load', setInitialPosition);
+
+  setTimeout(() => {
+    setInitialPosition();
     autoScrollStarted = true;
-}, 4000);
+  }, 4000);
 
-function animate() {
-      if (autoScrollStarted && !isHovered) {
-        container.scrollTop += scrollSpeed;
-      }
+  function animate() {
+    const halfHeight = container.scrollHeight / 2;
 
-      const halfHeight = container.scrollHeight / 2;
+    if (autoScrollStarted && !isPaused && halfHeight > 0) {
+      container.scrollTop += scrollSpeed;
+    }
 
+    if (halfHeight > 0) {
       if (container.scrollTop >= halfHeight) {
         container.scrollTop -= halfHeight;
       } else if (container.scrollTop <= 0) {
         container.scrollTop += halfHeight;
       }
-
-      requestAnimationFrame(animate);
     }
 
-requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
+});
