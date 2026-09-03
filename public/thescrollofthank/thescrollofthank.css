@@ -1,6 +1,6 @@
 :root {
-  --mouse-cursor: url("/assets/img/cursor.png"), auto;
-  --mouse-pointer: url("/assets/img/pointer.png"), pointer;
+    --mouse-cursor: url("/assets/img/cursor.png"), auto;
+    --mouse-pointer: url("/assets/img/pointer.png"), pointer;
 }
 
 * {
@@ -24,6 +24,10 @@ body {
     height: 100vh;
     overflow-y: auto;
     position: relative;
+    contain: content;
+    scroll-behavior: auto !important;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -36,6 +40,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0;
+    will-change: transform;
 }
 
 .gallery-track a {
@@ -53,5 +58,5 @@ body {
 }
 
 a {
-  cursor: var(--mouse-pointer);
+    cursor: var(--mouse-pointer);
 }
