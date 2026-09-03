@@ -37,24 +37,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   let autoScrollStarted = false;
   const scrollSpeed = 0.6;
 
+  let currentScroll = 0;
+  let touchTimeout = null;
+
   container.addEventListener('mouseenter', () => isPaused = true);
   container.addEventListener('mouseleave', () => isPaused = false);
 
-  container.addEventListener('touchstart', () => isPaused = true, { passive: true });
-  container.addEventListener('touchend', () => isPaused = false, { passive: true });
-  container.addEventListener('touchcancel', () => isPaused = false, { passive: true });
+  container.addEventListener('touchstart', () => {
+    isPaused = true;
+    if (touchTimeout) clearTimeout(touchTimeout);
+  }, { passive: true });
 
-  function setInitialPosition() {
-    const halfHeight = container.scrollHeight / 2;
-    if (halfHeight > 0 && container.scrollTop === 0) {
-      container.scrollTop = halfHeight;
-    }
-  }
-
-  window.addEventListener('load', setInitialPosition);
+  container.addEventListener('touchend', () => {
+    touchTimeout = setTimeout(() => {
+      isPaused = false;
+      currentScroll = container.scrollTop;
+    }, 1000);
+  }, { passive: true });
 
   setTimeout(() => {
-    setInitialPosition();
+    currentScroll = container.scrollTop;
     autoScrollStarted = true;
   }, 4000);
 
@@ -62,14 +64,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const halfHeight = container.scrollHeight / 2;
 
     if (autoScrollStarted && !isPaused && halfHeight > 0) {
-      container.scrollTop += scrollSpeed;
+      currentScroll += scrollSpeed;
+      container.scrollTop = currentScroll;
+    } else {
+      currentScroll = container.scrollTop;
     }
 
     if (halfHeight > 0) {
       if (container.scrollTop >= halfHeight) {
         container.scrollTop -= halfHeight;
+        currentScroll -= halfHeight;
       } else if (container.scrollTop <= 0) {
         container.scrollTop += halfHeight;
+        currentScroll += halfHeight;
       }
     }
 
