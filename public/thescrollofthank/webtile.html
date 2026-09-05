@@ -1,0 +1,101 @@
+<!-- WEBTILE - THE SCROLL OF THANK -->
+<!-- https://webtiles.kicya.net/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .gallery-container {
+            width: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-track {
+            display: flex;
+            flex-direction: column;
+
+            transform: translateY(-50%);
+
+            animation: infiniteScroll 36s linear 0s infinite;
+        }
+
+        .gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        .gallery-track img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        .gallery-track a {
+            display: block;
+            width: 100%;
+            line-height: 0;
+            text-decoration: none;
+        }
+
+        @keyframes infiniteScroll {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="gallery-container">
+        <div class="gallery-track">
+            <img src="img/0_thescrollofthank.webp" alt="The Scroll of Thank">
+            <a href="https://lovemichy.neocities.org"><img src="img/1_love_michy.webp" alt="love, michy"></a>
+            <a href="https://indiewebispunk.net"><img src="img/2_indiewebispunk.webp"
+                    alt="The IndieWeb Is Punk Manifesto"></a>
+            <img src="img/0_soon1.webp" alt="soon">
+            <img src="img/0_soon2.webp" alt="soon">
+            <img src="img/0_soon3.webp" alt="soon">
+            <img src="img/0_soon1.webp" alt="soon">
+            <img src="img/0_soon2.webp" alt="soon">
+            <img src="img/0_soon3.webp" alt="soon">
+
+            <img src="img/0_thescrollofthank.webp" alt="The Scroll of Thank">
+            <a href="https://lovemichy.neocities.org"><img src="img/1_love_michy.webp" alt="love, michy"></a>
+            <a href="https://indiewebispunk.net"><img src="img/2_indiewebispunk.webp"
+                    alt="The IndieWeb Is Punk Manifesto"></a>
+            <img src="img/0_soon1.webp" alt="soon">
+            <img src="img/0_soon2.webp" alt="soon">
+            <img src="img/0_soon3.webp" alt="soon">
+            <img src="img/0_soon1.webp" alt="soon">
+            <img src="img/0_soon2.webp" alt="soon">
+            <img src="img/0_soon3.webp" alt="soon">
+        </div>
+    </div>
+
+</body>
+
+</html>
