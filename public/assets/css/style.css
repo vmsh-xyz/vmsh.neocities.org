@@ -42,6 +42,8 @@ body {
   max-height: 100vh;
   overflow: hidden;
   display: flex;
+
+  animation: toggleSvg 6s infinite steps(1);
 }
 
 .page-wrapper {
@@ -150,4 +152,10 @@ button {
 
 #webamp .window {
   pointer-events: auto;
+}
+
+@keyframes toggleSvg {
+  80% {
+    background-image: url('/assets/img/kukerche27_twink.svg');
+  }
 }

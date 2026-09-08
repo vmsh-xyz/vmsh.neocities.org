@@ -14,7 +14,7 @@
 
 <body>
 
-  <div class="page-wrapper">
+  <div id="city-view" class="page-wrapper">
 
     <div class="scroll-block block-left">
       <div class="gallery-container" id="galleryContainer">
@@ -61,6 +61,14 @@
     </div>
 
   </div>
+
+  <script>
+    if (navigator.userAgent === "Screenjesus") {
+      // Let's see this "Rainbow baby weeeeeeeeee"
+      // frammyjammy.com rules! <3
+      document.getElementById("city-view").style.display = "none";
+    }
+  </script>
 
 </body>
 
